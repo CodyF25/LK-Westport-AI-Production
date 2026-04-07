@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Online - Little Kitchen Westport</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark-red: #8B0000;
+            --bg-dark: #0F0F0F;
+            --card-bg: #1A1A1A;
+            --text-light: #F5F5F5;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-light); display: flex; }
+
+        /* Sidebar Categories */
+        .sidebar { width: 300px; height: 100vh; background: #000; padding: 2rem; position: sticky; top: 0; border-right: 1px solid var(--glass); }
+        .sidebar h2 { font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 2rem; }
+        .cat-link { display: block; padding: 1rem; color: #888; text-decoration: none; border-radius: 8px; margin-bottom: 0.5rem; transition: 0.3s; }
+        .cat-link:hover, .cat-link.active { background: var(--glass); color: white; }
+
+        /* Main Menu Area */
+        .menu-container { flex: 1; padding: 3rem; }
+        .menu-section { margin-bottom: 4rem; }
+        .menu-section h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 2rem; color: var(--gold); }
+        .items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+        .item-card { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--glass); overflow: hidden; transition: 0.3s; }
+        .item-card:hover { transform: translateY(-5px); border-color: var(--gold); }
+        .item-img { height: 180px; background: #222; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: #444; }
+        .item-body { padding: 1.5rem; }
+        .item-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+        .item-name { font-weight: 600; font-size: 1.1rem; }
+        .item-price { color: var(--gold); font-weight: 600; }
+        .item-desc { font-size: 0.85rem; color: #888; margin-bottom: 1.5rem; height: 40px; overflow: hidden; }
+        .add-btn { width: 100%; background: var(--dark-red); color: white; border: none; padding: 0.8rem; border-radius: 6px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .add-btn:hover { background: #a50000; }
+
+        /* Cart Sidebar */
+        .cart-sidebar { width: 350px; height: 100vh; background: #000; border-left: 1px solid var(--glass); padding: 2rem; display: flex; flex-direction: column; position: sticky; top: 0; }
+        .cart-header { padding-bottom: 1.5rem; border-bottom: 1px solid var(--glass); margin-bottom: 1.5rem; }
+        .cart-items { flex: 1; overflow-y: auto; }
+        .cart-item { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.9rem; }
+        .cart-total { padding-top: 1.5rem; border-top: 1px solid var(--glass); margin-top: 1.5rem; }
+        .total-row { display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-weight: 600; }
+        .checkout-btn { width: 100%; background: var(--gold); color: black; border: none; padding: 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 700; margin-top: 1.5rem; font-size: 1rem; }
+
+        @media (max-width: 1024px) {
+            .sidebar { display: none; }
+            body { flex-direction: column; }
+            .cart-sidebar { width: 100%; height: auto; position: static; }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <h2>CATEGORIES</h2>
+        <a href="#starters" class="cat-link active">Appetizers</a>
+        <a href="#thai" class="cat-link">Thai Classics</a>
+        <a href="#specials" class="cat-link">Chef's Specials</a>
+        <a href="#sushi" class="cat-link">Sushi Rolls</a>
+        <div style="margin-top: 2rem; padding: 1rem; border: 1px solid var(--gold); border-radius: 8px;">
+            <p style="font-size: 0.8rem; color: var(--gold);">Westport Delivery Available</p>
+        </div>
+    </aside>
+
+    <main class="menu-container">
+        <header style="margin-bottom: 3rem;">
+            <a href="index.html" style="color: var(--gold); text-decoration: none; font-size: 0.9rem;">← Back to Home</a>
+            <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem; margin-top: 1rem;">Digital Menu</h1>
+        </header>
+
+        <section id="starters" class="menu-section">
+            <h3>Appetizers</h3>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-img">SATAY CHICKEN</div>
+                    <div class="item-body">
+                        <div class="item-header"><span class="item-name">Satay Chicken Sticks</span> <span class="item-price">$14.50</span></div>
+                        <p class="item-desc">Grilled marinated chicken with peanut sauce (4 pieces)</p>
+                        <button class="add-btn" onclick="addToCart('Satay Chicken', 14.50)">Add to Order</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="item-img">ROTI CANAI</div>
+                    <div class="item-body">
+                        <div class="item-header"><span class="item-name">Roti Canai</span> <span class="item-price">$9.00</span></div>
+                        <p class="item-desc">Malaysian pancake with vegetarian curry dip</p>
+                        <button class="add-btn" onclick="addToCart('Roti Canai', 9.00)">Add to Order</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="item-img">CRAB RANGOON</div>
+                    <div class="item-body">
+                        <div class="item-header"><span class="item-name">Crab Rangoon</span> <span class="item-price">$10.50</span></div>
+                        <p class="item-desc">Crispy wonton skin with cream cheese and kani (7 pieces)</p>
+                        <button class="add-btn" onclick="addToCart('Crab Rangoon', 10.50)">Add to Order</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="thai" class="menu-section">
+            <h3>Thai Classics</h3>
+            <div class="items-grid">
+                <div class="item-card">
+                    <div class="item-img">PAD THAI</div>
+                    <div class="item-body">
+                        <div class="item-header"><span class="item-name">Pad Thai</span> <span class="item-price">$19.00</span></div>
+                        <p class="item-desc">Rice noodles, egg, peanuts, bean sprouts</p>
+                        <button class="add-btn" onclick="addToCart('Pad Thai', 19.00)">Add to Order</button>
+                    </div>
+                </div>
+                <div class="item-card">
+                    <div class="item-img">GREEN CURRY</div>
+                    <div class="item-body">
+                        <div class="item-header"><span class="item-name">Green Curry</span> <span class="item-price">$18.90</span></div>
+                        <p class="item-desc">Coconut milk, bamboo shoots, eggplant, basil</p>
+                        <button class="add-btn" onclick="addToCart('Green Curry', 18.90)">Add to Order</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <aside class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Order</h3>
+        </div>
+        <div class="cart-items" id="cartList">
+            <p style="color: #444; text-align: center; margin-top: 2rem;">Your cart is empty</p>
+        </div>
+        <div class="cart-total">
+            <div class="total-row"><span>Subtotal</span> <span id="subtotal">$0.00</span></div>
+            <div class="total-row" style="font-size: 0.8rem; color: #888;"><span>Tax (6.35%)</span> <span id="tax">$0.00</span></div>
+            <div class="total-row" style="font-size: 1.2rem; margin-top: 1rem;"><span>Total</span> <span id="total">$0.00</span></div>
+            <button class="checkout-btn" onclick="checkout()">Checkout Now</button>
+        </div>
+    </aside>
+
+    <script>
+        let cart = [];
+        
+        function addToCart(name, price) {
+            cart.push({name, price});
+            updateCart();
+        }
+
+        function updateCart() {
+            const list = document.getElementById('cartList');
+            const subtotalEl = document.getElementById('subtotal');
+            const taxEl = document.getElementById('tax');
+            const totalEl = document.getElementById('total');
+            
+            if(cart.length === 0) {
+                list.innerHTML = '<p style="color: #444; text-align: center; margin-top: 2rem;">Your cart is empty</p>';
+                return;
+            }
+
+            list.innerHTML = '';
+            let subtotal = 0;
+            cart.forEach((item, index) => {
+                subtotal += item.price;
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `<span>${item.name}</span> <span>$${item.price.toFixed(2)}</span>`;
+                list.appendChild(div);
+            });
+
+            const tax = subtotal * 0.0635;
+            const total = subtotal + tax;
+
+            subtotalEl.innerText = `$${subtotal.toFixed(2)}`;
+            taxEl.innerText = `$${tax.toFixed(2)}`;
+            totalEl.innerText = `$${total.toFixed(2)}`;
+        }
+
+        function checkout() {
+            if(cart.length === 0) return alert('Your cart is empty');
+            alert('Order Sent! Adrian will notify you when it is ready for pickup or delivery.');
+            cart = [];
+            updateCart();
+        }
+    </script>
+</body>
+</html>

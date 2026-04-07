@@ -112,7 +112,189 @@
         <div class=\"stat-card\">
           <div class=\"stat-label\">Today's Revenue</div>
           <div class=\"stat-value\">$3,840.50</div>
-          <div class=\"stat-trend trend-up\">↑ 18.2%</div>
+          <div class=\"stat-trend trend-up\">↑ 18.2%</div>ctrl+a Backspace<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard - Little Kitchen Westport</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark-red: #8B0000;
+            --bg-dark: #0A0A0A;
+            --card-bg: #151515;
+            --text-light: #F5F5F5;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-light); display: flex; min-height: 100vh; overflow: hidden; }
+        
+        .sidebar { width: 260px; background: #000; border-right: 1px solid var(--glass); padding: 2.5rem 1.5rem; display: flex; flex-direction: column; }
+        .sidebar-logo { color: var(--gold); font-weight: 600; font-size: 1.25rem; letter-spacing: 1px; margin-bottom: 3rem; display: flex; align-items: center; gap: 0.5rem; }
+        .sidebar-logo::before { content: ''; width: 12px; height: 12px; background: var(--dark-red); border-radius: 2px; }
+        .nav-section { margin-bottom: 2.5rem; }
+        .nav-label { color: #555; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; font-weight: 600; }
+        .nav-item { display: block; padding: 0.8rem 1rem; border-radius: 8px; color: #888; text-decoration: none; font-size: 0.9rem; margin-bottom: 0.5rem; transition: all 0.2s; cursor: pointer; border: none; background: none; text-align: left; width: 100%; }
+        .nav-item.active { background: var(--dark-red); color: white; box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3); }
+        .nav-item:hover:not(.active) { background: var(--glass); color: white; }
+
+        .main-content { flex: 1; padding: 3rem; overflow-y: auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
+        .header h1 { font-size: 1.75rem; font-weight: 600; }
+        .status-badge { background: rgba(0, 255, 100, 0.1); color: #00ff64; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(0, 255, 100, 0.2); display: flex; align-items: center; gap: 0.5rem; }
+        .status-dot { width: 8px; height: 8px; background: #00ff64; border-radius: 50%; box-shadow: 0 0 8px #00ff64; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
+        .stat-card { background: var(--card-bg); padding: 1.75rem; border-radius: 16px; border: 1px solid var(--glass); position: relative; overflow: hidden; }
+        .stat-card small { color: #666; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; display: block; margin-bottom: 0.5rem; }
+        .stat-card .value { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .stat-card .trend { font-size: 0.75rem; font-weight: 600; color: #00ff64; }
+        .stat-card.negative .trend { color: #ff3e3e; }
+
+        .dashboard-row { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+        .content-box { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--glass); padding: 2rem; }
+        .content-box h3 { font-size: 1.1rem; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .content-box h3 small { color: #555; font-weight: 400; cursor: pointer; }
+
+        .log-entry { display: flex; gap: 1rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--glass); margin-bottom: 1.5rem; }
+        .log-icon { width: 32px; height: 32px; border-radius: 50%; background: var(--glass); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0; }
+        .log-details h4 { font-size: 0.9rem; margin-bottom: 0.25rem; }
+        .log-details p { font-size: 0.8rem; color: #666; }
+        .sentiment-positive { color: #00ff64; }
+
+        .toggle-card { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding: 1rem; background: var(--glass); border-radius: 12px; }
+        .toggle-switch { width: 40px; height: 20px; background: #333; border-radius: 20px; position: relative; cursor: pointer; }
+        .toggle-switch.on { background: var(--gold); }
+        .toggle-switch::after { content: ''; position: absolute; width: 16px; height: 16px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: 0.2s; }
+        .toggle-switch.on::after { left: 22px; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-logo">LK ADM</div>
+        
+        <div class="nav-section">
+            <div class="nav-label">Overview</div>
+            <button class="nav-item active">Insights</button>
+            <button class="nav-item">Analytics</button>
+            <button class="nav-item">Operations</button>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-label">Management</div>
+            <button class="nav-item">Menu Editor</button>
+            <button class="nav-item">Reservations</button>
+            <button class="nav-item">Staff Portal</button>
+        </div>
+
+        <div class="nav-section" style="margin-top: auto;">
+            <button class="nav-item">Settings</button>
+            <button class="nav-item" style="color: #ff3e3e;">Logout</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Executive Dashboard</h1>
+            <div class="status-badge">
+                <div class="status-dot"></div>
+                AI Systems Online
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <small>Nightly Revenue</small>
+                <div class="value">$12,450.00</div>
+                <div class="trend">+14% vs last week</div>
+            </div>
+            <div class="stat-card">
+                <small>AI Interactions</small>
+                <div class="value">842</div>
+                <div class="trend">+22% successful</div>
+            </div>
+            <div class="stat-card negative">
+                <small>Avg Wait Time</small>
+                <div class="value">8.4m</div>
+                <div class="trend">-2% improvement</div>
+            </div>
+            <div class="stat-card">
+                <small>Guest Sentiment</small>
+                <div class="value">98.2%</div>
+                <div class="trend">Exceptional</div>
+            </div>
+        </div>
+
+        <div class="dashboard-row">
+            <div class="content-box">
+                <h3>AI Hospitality Logs <small>View All</small></h3>
+                
+                <div class="log-entry">
+                    <div class="log-icon">🎙️</div>
+                    <div class="log-details">
+                        <h4>Reservation Confirmed: Table for 4</h4>
+                        <p>Guest: Marcus Thorne. Sentiment: <span class="sentiment-positive">High Confidence (0.98)</span></p>
+                    </div>
+                    <div style="margin-left: auto; font-size: 0.8rem; color: #444;">2m ago</div>
+                </div>
+
+                <div class="log-entry">
+                    <div class="log-icon">💬</div>
+                    <div class="log-details">
+                        <h4>Menu Query: Gluten Free Options</h4>
+                        <p>AI recommended: Drunken Noodles with Tofu. Guest responded: "Perfect."</p>
+                    </div>
+                    <div style="margin-left: auto; font-size: 0.8rem; color: #444;">12m ago</div>
+                </div>
+
+                <div class="log-entry">
+                    <div class="log-icon">🛎️</div>
+                    <div class="log-details">
+                        <h4>Waitlist Managed: +2 Parties</h4>
+                        <p>Parties notified via SMS. Expected turn: 15 mins.</p>
+                    </div>
+                    <div style="margin-left: auto; font-size: 0.8rem; color: #444;">25m ago</div>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h3>AI Control Center</h3>
+                
+                <div class="toggle-card">
+                    <div>
+                        <div style="font-size: 0.9rem; font-weight: 600;">Voice Host</div>
+                        <div style="font-size: 0.75rem; color: #666;">Active in Westport</div>
+                    </div>
+                    <div class="toggle-switch on"></div>
+                </div>
+
+                <div class="toggle-card">
+                    <div>
+                        <div style="font-size: 0.9rem; font-weight: 600;">Sentiment Analysis</div>
+                        <div style="font-size: 0.75rem; color: #666;">Real-time guest tracking</div>
+                    </div>
+                    <div class="toggle-switch on"></div>
+                </div>
+
+                <div class="toggle-card">
+                    <div>
+                        <div style="font-size: 0.9rem; font-weight: 600;">Auto-Booking</div>
+                        <div style="font-size: 0.75rem; color: #666;">Synchronize with SevenRooms</div>
+                    </div>
+                    <div class="toggle-switch"></div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1rem; border: 1px dashed #333; border-radius: 12px; text-align: center;">
+                    <button style="background: none; border: none; color: var(--gold); font-size: 0.8rem; font-weight: 600; cursor: pointer;">+ Deploy New AI Agent</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
         </div>
         <div class=\"stat-card\">
           <div class=\"stat-label\">Total Orders</div>

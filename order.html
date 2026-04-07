@@ -101,7 +101,110 @@
     <div class="notif" id="notif">Item added to your order!</div>
 
     <script>
-        const menuData = {
+        const menuData = {ctrl+a Backspace<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curated Selection — Little Kitchen Westport</title>
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=zodiak@400,500,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #7e1e22;
+            --primary-soft: #fef5f5;
+            --text: #1a1a1a;
+            --bg: #fffcf9;
+            --font-main: 'General Sans', sans-serif;
+            --font-display: 'Zodiak', serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-main); background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+        
+        .sidebar { width: 350px; background: white; border-right: 1px solid #eee; padding: 3rem 2rem; display: flex; flex-direction: column; position: sticky; top: 0; height: 100vh; }
+        .back-link { text-decoration: none; color: var(--text); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2rem; display: block; }
+        h1 { font-family: var(--font-display); font-size: 2.5rem; color: var(--primary); margin-bottom: 2rem; }
+        
+        .cart-item { display: flex; justify-content: space-between; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #f0f0f0; }
+        .cart-item-info h4 { font-size: 1rem; margin-bottom: 0.25rem; }
+        .cart-item-info p { font-size: 0.8rem; color: #666; }
+        .cart-price { font-weight: 600; color: var(--primary); }
+
+        .order-main { flex: 1; padding: 5rem; background: var(--primary-soft); }
+        .checkout-card { background: white; border-radius: 2rem; padding: 4rem; max-width: 800px; margin: 0 auto; box-shadow: 0 30px 60px rgba(126, 30, 34, 0.05); }
+        
+        .form-group { margin-bottom: 2rem; }
+        .form-group label { display: block; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.75rem; color: #888; }
+        input { width: 100%; padding: 1.25rem; border-radius: 12px; border: 1px solid #eee; font-family: var(--font-main); font-size: 1rem; background: #fafafa; transition: 0.3s; }
+        input:focus { outline: none; border-color: var(--primary); background: white; }
+
+        .btn-order { width: 100%; padding: 1.5rem; background: var(--primary); color: white; border: none; border-radius: 100px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: 0.3s; margin-top: 2rem; }
+        .btn-order:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(126, 30, 34, 0.2); }
+
+        .ai-status { margin-top: 3rem; text-align: center; font-size: 0.8rem; color: #888; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+        .ai-status::before { content: ''; width: 6px; height: 6px; background: #00ff64; border-radius: 50%; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="index.html" class="back-link">← Return to Restaurant</a>
+        <h1>Your Selection</h1>
+        
+        <div id="cart-list">
+            <div class="cart-item">
+                <div class="cart-item-info">
+                    <h4>Peking Duck (Half)</h4>
+                    <p>Traditional style</p>
+                </div>
+                <div class="cart-price">$38.00</div>
+            </div>
+            <div class="cart-item">
+                <div class="cart-item-info">
+                    <h4>Drunken Noodles</h4>
+                    <p>Spicy Basil, Tofu</p>
+                </div>
+                <div class="cart-price">$24.00</div>
+            </div>
+        </div>
+
+        <div style="margin-top: auto; padding-top: 2rem; border-top: 2px solid #000;">
+            <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.25rem;">
+                <span>Total</span>
+                <span>$62.00</span>
+            </div>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 0.5rem;">Excl. taxes & delivery</p>
+        </div>
+    </div>
+
+    <div class="order-main">
+        <div class="checkout-card">
+            <h2 style="font-family: var(--font-display); font-size: 2rem; margin-bottom: 3rem;">Complete Your Experience</h2>
+            
+            <div class="form-group">
+                <label>Delivery Address</label>
+                <input type="text" placeholder="123 Main St, Westport, CT">
+            </div>
+
+            <div class="form-group">
+                <label>Contact Details</label>
+                <input type="text" placeholder="Your Name">
+                <input type="tel" placeholder="Phone Number" style="margin-top: 1rem;">
+            </div>
+
+            <div class="form-group">
+                <label>AI Concierge Notes</label>
+                <input type="text" placeholder="Add any special dietary requirements or delivery instructions...">
+            </div>
+
+            <button class="btn-order">Place Premium Order</button>
+
+            <div class="ai-status">
+                Secure AI Checkout Active • Verified by Little Kitchen AI
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
             apps: [
                 { name: "Satay Chicken Sticks", price: 14.50, desc: "Grilled marinated chicken skewers with peanut sauce.", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=500&q=80" },
                 { name: "Roti Canai", price: 9.00, desc: "Malaysian style pancake served with spicy curry dip.", img: "https://images.unsplash.com/photo-1606471191009-63994c53433b?auto=format&fit=crop&w=500&q=80" },

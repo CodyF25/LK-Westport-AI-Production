@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Little Kitchen WESTPORT - Fine Thai Dining & AI Hospitality</title>
+  <style>
+    :root {
+      --gold: #D4AF37;
+      --dark-red: #8B0000;
+      --bg-dark: #0F0F0F;
+      --text-light: #F5F5F5;
+      --glass: rgba(255, 255, 255, 0.05);
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-light); margin: 0; }
+    nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 5%; background: rgba(15, 15, 15, 0.95); z-index: 1000; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--glass); box-sizing: border-box; }
+    .hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1920&q=80') center/cover; }
+    .hero-title { font-size: 4rem; margin: 0; }
+    .chat-widget { position: fixed; bottom: 30px; right: 30px; width: 350px; height: 500px; background: #1A1A1A; border-radius: 12px; display: flex; flex-direction: column; border: 1px solid var(--glass); z-index: 2000; }
+    .chat-header { background: var(--dark-red); padding: 1rem; border-radius: 12px 12px 0 0; font-weight: bold; }
+    .chat-messages { flex: 1; padding: 1rem; overflow-y: auto; }
+    .chat-input { padding: 1rem; display: flex; gap: 10px; border-top: 1px solid var(--glass); }
+    input { flex: 1; background: #2A2A2A; border: none; color: white; padding: 0.5rem; border-radius: 4px; }
+    button { background: var(--dark-red); border: none; color: white; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div style="font-weight:bold; font-size:1.5rem;">Little Kitchen <span style="font-weight:normal; font-size:0.8rem; color:grey;">WESTPORT</span></div>
+    <div><button onclick="alert('Coming Soon')">ORDER NOW</button></div>
+  </nav>
+  <div class="hero">
+    <div>
+      <div style="color:var(--gold); letter-spacing:4px; margin-bottom:1rem;">FINE THAI DINING & AI HOSPITALITY</div>
+      <h1 class="hero-title">Artisanal Flavors,<br>Intelligent Service.</h1>
+    </div>
+  </div>
+  <div class="chat-widget">
+    <div class="chat-header">Adrian - AI Concierge</div>
+    <div class="chat-messages" id="msgs">
+      <div style="background:#2A2A2A; padding:0.8rem; border-radius:8px; margin-bottom:10px;">
+        Good morning! I'm Adrian. I can help you with reservations or menu questions. How can I assist you today?
+      </div>
+    </div>
+    <div class="chat-input">
+      <input type="text" placeholder="Ask Adrian..." id="input">
+      <button onclick="send()">Send</button>
+    </div>
+  </div>
+  <script>
+    function send() {
+      const i = document.getElementById('input');
+      const m = document.getElementById('msgs');
+      if(!i.value) return;
+      const userDiv = document.createElement('div');
+      userDiv.style = "background:var(--dark-red); padding:0.8rem; border-radius:8px; margin-bottom:10px; align-self:flex-end; text-align:right;";
+      userDiv.innerText = i.value;
+      m.appendChild(userDiv);
+      i.value = '';
+      setTimeout(() => {
+        const aiDiv = document.createElement('div');
+        aiDiv.style = "background:#2A2A2A; padding:0.8rem; border-radius:8px; margin-bottom:10px;";
+        aiDiv.innerText = "I'm currently being configured for production. I'll be able to help you fully in just a moment!";
+        m.appendChild(aiDiv);
+      }, 1000);
+    }
+  </script>
+</body>
+</html>

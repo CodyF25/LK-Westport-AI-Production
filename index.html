@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Little Kitchen WESTPORT - Fine Thai Dining & AI Hospitality</title>
+    <title>Little Kitchen WESTPORT | Fine Thai Dining & AI Hospitality</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -20,7 +20,7 @@
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
 
         /* Navigation */
-        nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 5%; background: rgba(15, 15, 15, 0.95); z-index: 1000; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--glass); transition: var(--transition); }
+        nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 5%; background: rgba(15, 15, 15, 0.95); z-index: 1000; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--glass); }
         .logo { font-weight: 700; font-size: 1.5rem; letter-spacing: 1px; }
         .logo span { font-weight: 300; font-size: 0.8rem; color: #888; margin-left: 5px; text-transform: uppercase; }
         .nav-links { display: flex; gap: 2rem; align-items: center; }
@@ -30,267 +30,123 @@
         .cta-btn:hover { background: #a50000; transform: translateY(-2px); }
 
         /* Hero Section */
-        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1920&q=80') center/cover fixed; }
-        .hero-content { max-width: 800px; padding: 0 20px; }
-        .hero-tagline { color: var(--gold); letter-spacing: 5px; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 1.5rem; }
-        .hero-title { font-size: clamp(3rem, 8vw, 5rem); line-height: 1.1; margin-bottom: 2rem; }
-        .hero-btns { display: flex; gap: 1rem; justify-content: center; }
-        .outline-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 0.8rem 1.5rem; border-radius: 4px; font-weight: 600; cursor: pointer; transition: var(--transition); text-transform: uppercase; }
-        .outline-btn:hover { background: var(--gold); color: black; }
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1920&q=80') center/cover; padding: 0 5%; }
+        .hero-content { max-width: 800px; }
+        .hero-tag { color: var(--gold); letter-spacing: 4px; font-size: 0.9rem; margin-bottom: 1.5rem; text-transform: uppercase; animation: fadeInDown 1s ease; }
+        .hero h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 2rem; animation: fadeIn 1.5s ease; }
+        .hero p { font-size: 1.2rem; color: #ccc; margin-bottom: 2.5rem; font-weight: 300; }
 
-        /* Menu Section */
-        .section { padding: 8rem 10%; }
-        .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-header h2 { font-size: 3rem; margin-bottom: 1rem; }
-        .section-header .line { width: 60px; height: 2px; background: var(--gold); margin: 0 auto; }
-        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
-        .menu-category h3 { color: var(--gold); margin-bottom: 2rem; border-bottom: 1px solid var(--glass); padding-bottom: 0.5rem; }
-        .menu-item { display: flex; justify-content: space-between; margin-bottom: 1.5rem; transition: var(--transition); padding: 10px; border-radius: 8px; }
-        .menu-item:hover { background: var(--glass); }
-        .item-info { flex: 1; }
-        .item-name { font-weight: 600; font-size: 1.1rem; }
-        .item-desc { font-size: 0.85rem; color: #888; margin-top: 4px; }
-        .item-price { font-weight: 600; color: var(--gold); margin-left: 1rem; }
+        /* Menu Preview */
+        .section { padding: 100px 5%; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 3rem; color: var(--gold); margin-bottom: 10px; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .menu-item { background: var(--glass); padding: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); transition: var(--transition); }
+        .menu-item:hover { background: rgba(255,255,255,0.08); transform: translateY(-5px); }
+        .menu-item h3 { color: var(--gold); margin-bottom: 10px; display: flex; justify-content: space-between; }
+        .price { font-family: 'Inter', sans-serif; font-size: 1.1rem; color: var(--text-light); }
 
-        /* Reservation Section */
-        .reservation { background: #151515; }
-        .res-container { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-        .res-form { background: #1A1A1A; padding: 3rem; border-radius: 12px; border: 1px solid var(--glass); }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: #aaa; }
-        .form-control { width: 100%; background: #2A2A2A; border: 1px solid #333; color: white; padding: 0.8rem; border-radius: 4px; outline: none; transition: 0.3s; }
-        .form-control:focus { border-color: var(--gold); }
+        /* AI Concierge Widget */
+        .chat-widget { position: fixed; bottom: 30px; right: 30px; width: 380px; height: 550px; background: #161616; border-radius: 16px; display: flex; flex-direction: column; border: 1px solid var(--glass); z-index: 2000; box-shadow: 0 20px 40px rgba(0,0,0,0.5); overflow: hidden; transform: translateY(20px); opacity: 0; pointer-events: none; transition: var(--transition); }
+        .chat-widget.active { transform: translateY(0); opacity: 1; pointer-events: all; }
+        .chat-header { background: var(--dark-red); padding: 1.2rem; color: white; display: flex; align-items: center; gap: 12px; }
+        .chat-avatar { width: 40px; height: 40px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--bg-dark); }
+        .chat-messages { flex: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: #1a1a1a; }
+        .msg { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 0.95rem; }
+        .msg.ai { background: var(--glass); align-self: flex-start; border-bottom-left-radius: 2px; }
+        .msg.user { background: var(--dark-red); align-self: flex-end; border-bottom-right-radius: 2px; text-align: right; }
+        .chat-input-area { padding: 1.2rem; background: #161616; display: flex; gap: 10px; border-top: 1px solid var(--glass); }
+        .chat-input-area input { flex: 1; background: #252525; border: 1px solid rgba(255,255,255,0.1); color: white; padding: 0.8rem 1rem; border-radius: 8px; outline: none; transition: var(--transition); }
+        .chat-input-area input:focus { border-color: var(--gold); }
+        .chat-trigger { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--dark-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1999; box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition: var(--transition); }
+        .chat-trigger:hover { transform: scale(1.1); background: #a50000; }
 
-        /* Chat Widget */
-        .chat-widget { position: fixed; bottom: 30px; right: 30px; width: 380px; height: 550px; background: #1A1A1A; border-radius: 16px; display: flex; flex-direction: column; border: 1px solid var(--glass); z-index: 2000; box-shadow: 0 20px 40px rgba(0,0,0,0.5); overflow: hidden; transform: translateY(0); transition: var(--transition); }
-        .chat-header { background: var(--dark-red); padding: 1.2rem; display: flex; align-items: center; gap: 12px; }
-        .chat-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; color: black; font-weight: bold; }
-        .chat-messages { flex: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-        .msg { max-width: 85%; padding: 1rem; border-radius: 12px; font-size: 0.95rem; line-height: 1.4; position: relative; }
-        .msg.ai { background: #2A2A2A; align-self: flex-start; border-bottom-left-radius: 2px; }
-        .msg.user { background: var(--dark-red); align-self: flex-end; border-bottom-right-radius: 2px; }
-        .chat-input-area { padding: 1.2rem; border-top: 1px solid var(--glass); display: flex; gap: 10px; }
-        .chat-input { flex: 1; background: #2A2A2A; border: none; color: white; padding: 0.8rem 1rem; border-radius: 8px; outline: none; }
-        .send-btn { background: var(--gold); color: black; border: none; width: 40px; height: 40px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
-        .send-btn:hover { transform: scale(1.05); }
-
-        /* Footer */
-        footer { padding: 4rem 10%; background: #050505; border-top: 1px solid var(--glass); text-align: center; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 3rem; text-align: left; }
-        .footer-col h4 { color: var(--gold); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px; }
-        .footer-col p { color: #888; font-size: 0.9rem; margin-bottom: 0.5rem; }
-        .staff-link { color: #444; text-decoration: none; font-size: 0.8rem; margin-top: 2rem; display: inline-block; }
-        .staff-link:hover { color: var(--gold); }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         @media (max-width: 768px) {
-            .res-container { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 3rem; }
             .nav-links { display: none; }
-            .chat-widget { width: 90%; right: 5%; bottom: 20px; }
+            .chat-widget { width: calc(100% - 40px); bottom: 20px; right: 20px; }
         }
     </style>
 </head>
 <body>
     <nav>
-        <div class="logo">LITTLE KITCHEN<span>Westport</span></div>
+        <div class="logo">Little Kitchen <span>Westport</span></div>
         <div class="nav-links">
-            <a href="#menu">Menu</a>
-            <a href="#reservations">Reservations</a>
-            <a href="#contact">Contact</a>
+            <a href=\"#menu\">Menu</a>
+            <a href=\"#reservations\">Reservations</a>
+            <a href=\"#about\">Our Story</a>
         </div>
-        <button class="cta-btn" onclick="location.href='order.html'">Order Now</button>
+        <button class="cta-btn" onclick=\"toggleChat()\">Order Now</button>
     </nav>
 
-    <header class="hero">
+    <section class="hero">
         <div class="hero-content">
-            <p class="hero-tagline">Authentic Asian Fusion</p>
-            <h1 class="hero-title">Where Tradition Meets Intelligence.</h1>
-            <div class="hero-btns">
-                <button class="cta-btn" onclick="scrollToSection('reservations')">Book a Table</button>
-                <button class="outline-btn" onclick="scrollToSection('menu')">View Menu</button>
+            <div class="hero-tag">Exquisite Thai Cuisine</div>
+            <h1>The Intersection of Heritage and Innovation.</h1>
+            <p>Experience Westport's finest Thai flavors, curated with precision and served by our intelligent hospitality suite.</p>
+            <div style=\"display:flex; gap:20px; justify-content:center;\">
+                <button class="cta-btn" onclick=\"document.getElementById('menu').scrollIntoView()\">Explore Menu</button>
+                <button class="cta-btn" style=\"background:transparent; border:1px solid var(--gold); color:var(--gold);\" onclick=\"toggleChat()\">Speak with Adrian</button>
             </div>
         </div>
-    </header>
+    </section>
 
-    <section class="section" id="menu">
-        <div class="section-header">
-            <h2>The Menu</h2>
-            <div class="line"></div>
+    <section id="menu" class="section">
+        <div class="section-title">
+            <div class="hero-tag" style=\"margin-bottom:0.5rem;\">Chef's Selection</div>
+            <h2>Signature Dishes</h2>
         </div>
         <div class="menu-grid">
-            <div class="menu-category">
-                <h3>Appetizers</h3>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <div class="item-name">Satay Chicken Sticks</div>
-                        <div class="item-desc">Grilled marinated chicken with peanut sauce (4 pieces)</div>
-                    </div>
-                    <div class="item-price">$14.50</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <div class="item-name">Roti Canai</div>
-                        <div class="item-desc">Malaysian pancake with vegetarian curry dip</div>
-                    </div>
-                    <div class="item-price">$9.00</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <div class="item-name">Crab Rangoon</div>
-                        <div class="item-desc">Crispy wonton skin with cream cheese and kani (7 pieces)</div>
-                    </div>
-                    <div class="item-price">$10.50</div>
-                </div>
+            <div class="menu-item">
+                <h3><span>Crispy Duck</span> <span class=\"price\">$32</span></h3>
+                <p>Half duck deboned, served with your choice of Basil, Tamarind, or Panang Curry sauce.</p>
             </div>
-            <div class="menu-category">
-                <h3>Thai Classics</h3>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <div class="item-name">Pad Thai</div>
-                        <div class="item-desc">Choice of chicken, beef, or shrimp with crushed peanuts</div>
-                    </div>
-                    <div class="item-price">$19.00</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <div class="item-name">Green Curry</div>
-                        <div class="item-desc">Authentic Thai green curry with coconut milk and basil</div>
-                    </div>
-                    <div class="item-price">$18.90</div>
-                </div>
-                <div class="menu-item">
-                    <div class="item-info">
-                        <div class="item-name">Crispy Duck</div>
-                        <div class="item-desc">Half duck roasted with Chef special sauce</div>
-                    </div>
-                    <div class="item-price">$28.00</div>
-                </div>
+            <div class="menu-item">
+                <h3><span>Lemongrass Sea Bass</span> <span class=\"price\">$36</span></h3>
+                <p>Steamed Chilean Sea Bass with fresh lemongrass, kaffir lime leaves, and spicy lime vinaigrette.</p>
+            </div>
+            <div class="menu-item">
+                <h3><span>Golden Crab Fried Rice</span> <span class=\"price\">$28</span></h3>
+                <p>Premium jumbo lump crab meat, organic eggs, scallions, and cilantro.</p>
             </div>
         </div>
     </section>
 
-    <section class="section reservation" id="reservations">
-        <div class="res-container">
-            <div class="res-info">
-                <h2 style="font-size: 3rem; margin-bottom: 2rem;">Host Your Evening</h2>
-                <p style="color: #aaa; margin-bottom: 2rem; font-size: 1.1rem;">Experience the finest Thai and Asian fusion in Westport. Adrian, our AI Concierge, can also help you book through the chat below.</p>
-                <div class="hours" style="margin-top: 3rem;">
-                    <h4 style="color: var(--gold); margin-bottom: 1rem; text-transform: uppercase;">Dining Hours</h4>
-                    <p>DAILY: 11:30 AM - 10:00 PM</p>
-                </div>
-            </div>
-            <div class="res-form" id="resFormContainer">
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" class="form-control" id="resName" placeholder="Adrian Smith">
-                </div>
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    <input type="tel" class="form-control" id="resPhone" placeholder="(203) 000-0000">
-                </div>
-                <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <div class="form-group">
-                        <label>Date</label>
-                        <input type="date" class="form-control" id="resDate">
-                    </div>
-                    <div class="form-group">
-                        <label>Time</label>
-                        <input type="time" class="form-control" id="resTime">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Guests</label>
-                    <select class="form-control" id="resGuests">
-                        <option>2 Guests</option>
-                        <option>3 Guests</option>
-                        <option>4 Guests</option>
-                        <option>5+ Guests</option>
-                    </select>
-                </div>
-                <button class="cta-btn" style="width: 100%; margin-top: 1rem;" onclick="submitReservation()">Request Reservation</button>
-            </div>
-        </div>
-    </section>
+    <div class="chat-trigger" id=\"chat-trigger\" onclick=\"toggleChat()\">
+        <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"white\"><path d=\"M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z\"/></svg>
+    </div>
 
-    <div class="chat-widget" id="chatWidget">
+    <div class="chat-widget" id=\"chat-widget\">
         <div class="chat-header">
             <div class="chat-avatar">A</div>
-            <div class="chat-info">
-                <div style="font-weight: 600;">Adrian</div>
-                <div style="font-size: 0.75rem; opacity: 0.8;">AI Concierge • Voice Active</div>
+            <div>
+                <div style=\"font-weight:600;\">Adrian</div>
+                <div style=\"font-size:0.75rem; opacity:0.8;\">AI Hospitality Concierge</div>
             </div>
+            <div style=\"margin-left:auto; cursor:pointer;\" onclick=\"toggleChat()\">✕</div>
         </div>
-        <div class="chat-messages" id="msgs">
-            <div class="msg ai">Hello! I'm Adrian. Welcome to Little Kitchen of Westport. I can help you with menu details, prices, or even book a table for you. What's on your mind?</div>
+        <div class="chat-messages" id=\"msgs\">
+            <div class=\"msg ai\">Sawadee krup! I'm Adrian. I can help you with menu recommendations, reservations, or placing an order. How may I serve you?</div>
         </div>
-        <div class="chat-input-area">
-            <input type="text" class="chat-input" placeholder="Ask Adrian about the menu..." id="chatInput" onkeypress="if(event.key==='Enter') sendMsg()">
-            <button class="send-btn" onclick="sendMsg()">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-            </button>
+        <div class=\"chat-input-area\">
+            <input type=\"text\" placeholder=\"Type your message...\" id=\"input\" onkeypress=\"if(event.key==='Enter') send()\">
+            <button class=\"cta-btn\" style=\"padding: 0.6rem 1.2rem;\" onclick=\"send()\">Send</button>
         </div>
     </div>
 
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>Visit Us</h4>
-                <p>423 Post Road East</p>
-                <p>Westport, CT 06880</p>
-            </div>
-            <div class="footer-col">
-                <h4>Hours</h4>
-                <p>Mon-Thu: 11:30am - 9:30pm</p>
-                <p>Fri-Sat: 11:30am - 10:30pm</p>
-                <p>Sun: 12:00pm - 9:30pm</p>
-            </div>
-            <div class="footer-col">
-                <h4>Contact</h4>
-                <p>(203) 454-5511</p>
-                <p>hospitality@littlekitchen.com</p>
-            </div>
-        </div>
-        <p style="color: #444; font-size: 0.8rem;">© 2026 Little Kitchen of Westport. Powered by Adrian AI.</p>
-        <a href="admin.html" class="staff-link">Staff Login & Dashboard</a>
-    </footer>
-
     <script>
-        const VOICE_ID = 'cjVigY5qzO86Huf0OWal';
         const API_KEY = 'sk_f2a01c44c7c2605e23148670463c6704685083bcff0c41cd';
+        const VOICE_ID = 'cjVigY5qzO86Huf0OWal'; // Eric Voice
 
-        function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function submitReservation() {
-            const container = document.getElementById('resFormContainer');
-            const name = document.getElementById('resName').value;
-            const phone = document.getElementById('resPhone').value;
-            const date = document.getElementById('resDate').value;
-            const time = document.getElementById('resTime').value;
-            const guests = document.getElementById('resGuests').value;
-
-            if(!name || !phone || !date || !time) return alert('Please fill in all fields');
-
-            const reservations = JSON.parse(localStorage.getItem('lk_reservations')) || [];
-            const newRes = {
-                id: 'RES-' + Date.now(),
-                name,
-                phone,
-                date,
-                time,
-                guests,
-                status: 'Confirmed'
-            };
-            reservations.push(newRes);
-            localStorage.setItem('lk_reservations', JSON.stringify(reservations));
-
-            container.innerHTML = `
-                <div style="text-align:center; padding: 2rem;">
-                    <h3 style="color:var(--gold); margin-bottom:1rem;">Reservation Confirmed</h3>
-                    <p>Thank you, ${name}. We've saved your table for ${date} at ${time}. See you soon!</p>
-                    <button class="outline-btn" style="margin-top:2rem;" onclick="location.reload()">Book Another</button>
-                </div>
-            `;
+        function toggleChat() {
+            const widget = document.getElementById('chat-widget');
+            widget.classList.toggle('active');
+            if(widget.classList.contains('active')) {
+                document.getElementById('input').focus();
+            }
         }
 
         async function speak(text) {
@@ -311,48 +167,38 @@
                 const url = URL.createObjectURL(blob);
                 const audio = new Audio(url);
                 audio.play();
-            } catch (e) { console.error("TTS Error:", e); }
+            } catch (e) { console.error('Voice synthesis failed', e); }
         }
 
-        function addMsg(text, sender) {
+        function send() {
+            const i = document.getElementById('input');
             const m = document.getElementById('msgs');
-            const div = document.createElement('div');
-            div.className = `msg ${sender}`;
-            div.innerText = text;
-            m.appendChild(div);
+            if(!i.value) return;
+
+            const userVal = i.value;
+            const uDiv = document.createElement('div');
+            uDiv.className = 'msg user';
+            uDiv.innerText = userVal;
+            m.appendChild(uDiv);
+            i.value = '';
             m.scrollTop = m.scrollHeight;
-        }
-
-        function sendMsg() {
-            const input = document.getElementById('chatInput');
-            const val = input.value.trim();
-            if(!val) return;
-
-            addMsg(val, 'user');
-            input.value = '';
 
             setTimeout(async () => {
-                let reply = "I'm still learning the specifics of every dish, but I'd recommend our Chef's Specialty Sesame Beef or the Fuji Mama Roll. Would you like me to book a table for you to try them?";
-                const q = val.toLowerCase();
-
-                if(q.includes('price') || q.includes('how much')) {
-                    if(q.includes('satay')) reply = "The Satay Chicken Sticks are $14.50 for 4 pieces.";
-                    else if(q.includes('roti')) reply = "Our Roti Canai is $9.00 and comes with a delicious curry dip.";
-                    else if(q.includes('pad thai')) reply = "The Pad Thai is $19.00 and can be made with chicken, beef, or shrimp.";
-                    else if(q.includes('duck')) reply = "The Crispy Duck is a premium specialty priced at $28.00.";
-                    else if(q.includes('sushi') || q.includes('roll')) reply = "Our signature rolls range from $18.00 for the Little Kitchen roll to $21.50 for the Fuji Mama.";
-                } else if(q.includes('menu') || q.includes('food') || q.includes('eat')) {
-                    reply = "Our menu features Appetizers like Satay Sticks and Roti Canai, Thai Classics like Pad Thai and Green Curry, and unique Sushi rolls. Is there a specific category you're interested in?";
-                } else if(q.includes('book') || q.includes('reservation') || q.includes('table')) {
-                    reply = "I'd be happy to help! You can use the form on the page, or just tell me the date and time you're thinking of, and I'll check our availability.";
-                    scrollToSection('reservations');
-                } else if(q.includes('hello') || q.includes('hi')) {
-                    reply = "Hello! Welcome to Little Kitchen Westport. How can I assist you today?";
-                } else if(q.includes('where') || q.includes('address') || q.includes('located')) {
-                    reply = "We are located at 423 Post Road East, Westport, CT 06880.";
+                let reply = \"I'm currently processing that for you. As your AI concierge, I can assist with reservations at our Westport location or provide detailed information about our signature Thai dishes.\";
+                
+                const q = userVal.toLowerCase();
+                if(q.includes('menu') || q.includes('food')) {
+                    reply = \"Our menu features artisanal Thai dishes like our Crispy Duck and Lemongrass Sea Bass. Would you like me to highlight our most popular appetizers?\";
+                } else if(q.includes('book') || q.includes('reserve') || q.includes('table')) {
+                    reply = \"I can certainly help with a reservation. We are currently accepting bookings for this evening. What time were you thinking for your party?\";
                 }
 
-                addMsg(reply, 'ai');
+                const aDiv = document.createElement('div');
+                aDiv.className = 'msg ai';
+                aDiv.innerText = reply;
+                m.appendChild(aDiv);
+                m.scrollTop = m.scrollHeight;
+                
                 await speak(reply);
             }, 600);
         }

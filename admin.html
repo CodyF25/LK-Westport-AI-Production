@@ -14,220 +14,270 @@
             --text-light: #F5F5F5;
             --glass: rgba(255, 255, 255, 0.05);
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-light); display: flex; min-height: 100vh; }
-
-        .sidebar {
-            width: 240px; background: #000; border-right: 1px solid var(--glass);
-            padding: 2rem 1.5rem; display: flex; flex-direction: column;
-        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-light); display: flex; min-height: 100vh; overflow: hidden; }
+        
+        .sidebar { width: 240px; background: #000; border-right: 1px solid var(--glass); padding: 2rem 1.5rem; display: flex; flex-direction: column; }
         .sidebar-logo { color: var(--gold); font-weight: 600; font-size: 1.1rem; letter-spacing: 1px; margin-bottom: 2.5rem; }
         .nav-section { margin-bottom: 2rem; }
         .nav-label { color: #555; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.75rem; }
-        .nav-item {
-            display: block; padding: 0.7rem 1rem; border-radius: 6px; color: #888;
-            text-decoration: none; font-size: 0.9rem; margin-bottom: 0.3rem;
-            transition: all 0.2s; cursor: pointer;
-        }
+        .nav-item { display: block; padding: 0.7rem 1rem; border-radius: 6px; color: #888; text-decoration: none; font-size: 0.9rem; margin-bottom: 0.3rem; transition: all 0.2s; cursor: pointer; border: none; background: none; text-align: left; width: 100%; }
         .nav-item.active { background: var(--dark-red); color: white; }
         .nav-item:hover:not(.active) { background: var(--glass); color: white; }
 
         .main-content { flex: 1; padding: 2.5rem; overflow-y: auto; }
-        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
-        .page-title { font-size: 1.6rem; font-weight: 600; }
-        .status-badge { background: #1a4a1a; color: #4ade80; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
+        .status-badge { background: rgba(0, 255, 100, 0.1); color: #00ff64; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(0, 255, 100, 0.2); }
+
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
 
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
         .stat-card { background: var(--card-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--glass); }
-        .stat-label { color: #666; font-size: 0.8rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
-        .stat-value { font-size: 1.8rem; font-weight: 600; color: var(--gold); }
-        .stat-change { font-size: 0.8rem; color: #4ade80; margin-top: 0.3rem; }
+        .stat-label { color: #666; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+        .stat-value { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.25rem; }
+        .stat-trend { font-size: 0.8rem; font-weight: 500; }
+        .trend-up { color: #00ff64; }
 
-        .section-card { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--glass); padding: 1.5rem; margin-bottom: 1.5rem; }
-        .section-title { font-size: 1rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--gold); }
+        .card { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--glass); padding: 1.5rem; margin-bottom: 1.5rem; }
+        .card-title { font-size: 1rem; font-weight: 600; margin-bottom: 1.25rem; color: var(--gold); }
 
-        .orders-table { width: 100%; border-collapse: collapse; }
-        .orders-table th { text-align: left; padding: 0.75rem; font-size: 0.75rem; color: #666; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--glass); }
-        .orders-table td { padding: 1rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.9rem; }
-        .badge { padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
-        .badge-green { background: #1a4a1a; color: #4ade80; }
-        .badge-yellow { background: #3a3000; color: #fbbf24; }
-        .badge-red { background: #3a1a1a; color: #f87171; }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; color: #444; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; padding: 0.75rem 0; border-bottom: 1px solid var(--glass); }
+        td { padding: 1.25rem 0; font-size: 0.9rem; border-bottom: 1px solid var(--glass); }
+        .status { padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+        .status-ready { background: rgba(0, 255, 100, 0.1); color: #00ff64; }
+        .status-preparing { background: rgba(255, 170, 0, 0.1); color: #ffaa00; }
 
-        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .btn { padding: 0.6rem 1.2rem; border-radius: 6px; border: none; cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; }
-        .btn-gold { background: var(--gold); color: #111; }
-        .btn-gold:hover { background: #c9a227; }
-        .btn-outline { background: transparent; border: 1px solid var(--glass); color: var(--text-light); }
-        .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+        .log-item { display: flex; gap: 1rem; padding: 1rem; background: #0a0a0a; border-radius: 8px; margin-bottom: 0.75rem; border-left: 3px solid var(--dark-red); }
+        .log-time { color: #444; font-size: 0.8rem; min-width: 60px; }
+        .log-text { font-size: 0.85rem; color: #aaa; line-height: 1.4; }
 
-        .ai-log { display: flex; flex-direction: column; gap: 0.75rem; }
-        .ai-log-item { padding: 0.75rem 1rem; background: var(--glass); border-radius: 8px; font-size: 0.85rem; }
-        .ai-log-time { color: #666; font-size: 0.75rem; margin-bottom: 0.25rem; }
-        .ai-log-text { color: #ccc; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        .menu-item { background: #0a0a0a; padding: 1rem; border-radius: 8px; border: 1px solid var(--glass); display: flex; justify-content: space-between; align-items: center; }
+        .toggle { width: 40px; height: 20px; background: #333; border-radius: 20px; position: relative; cursor: pointer; }
+        .toggle.on { background: var(--dark-red); }
+        .toggle::after { content: ''; position: absolute; width: 16px; height: 16px; background: white; border-radius: 50%; top: 2px; left: 2px; transition: 0.2s; }
+        .toggle.on::after { left: 22px; }
     </style>
 </head>
 <body>
-
-<aside class="sidebar">
-    <div class="sidebar-logo">LITTLE KITCHEN</div>
-    <nav>
+    <div class="sidebar">
+        <div class="sidebar-logo">LITTLE KITCHEN</div>
+        
         <div class="nav-section">
             <div class="nav-label">Overview</div>
-            <a class="nav-item active" href="#">Dashboard</a>
-            <a class="nav-item" href="#">Analytics</a>
+            <button class="nav-item active" data-tab="dashboard">Dashboard</button>
+            <button class="nav-item" data-tab="analytics">Analytics</button>
         </div>
+
         <div class="nav-section">
             <div class="nav-label">Operations</div>
-            <a class="nav-item" href="#">Orders</a>
-            <a class="nav-item" href="#">Reservations</a>
-            <a class="nav-item" href="#">Menu Manager</a>
+            <button class="nav-item" data-tab="orders">Orders</button>
+            <button class="nav-item" data-tab="reservations">Reservations</button>
+            <button class="nav-item" data-tab="menu">Menu Manager</button>
         </div>
+
         <div class="nav-section">
             <div class="nav-label">AI System</div>
-            <a class="nav-item" href="#">Concierge Logs</a>
-            <a class="nav-item" href="#">Voice Config</a>
+            <button class="nav-item" data-tab="logs">Concierge Logs</button>
+            <button class="nav-item" data-tab="voice">Voice Config</button>
         </div>
-    </nav>
-</aside>
 
-<main class="main-content">
-    <div class="page-header">
-        <div class="page-title">Dashboard</div>
-        <div style="display:flex; gap:1rem; align-items:center;">
-            <span class="status-badge">&#9679; All Systems Online</span>
-            <a href="index.html" class="btn btn-outline">View Live Site</a>
+        <div style="margin-top: auto;">
+            <a href="index.html" class="nav-item">View Live Site</a>
         </div>
     </div>
 
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-label">Today's Revenue</div>
-            <div class="stat-value">$3,840</div>
-            <div class="stat-change">+18% vs yesterday</div>
+    <div class="main-content">
+        <div class="header">
+            <h1 id="tab-title">Dashboard</h1>
+            <div class="status-badge">● All Systems Online</div>
         </div>
-        <div class="stat-card">
-            <div class="stat-label">Orders Today</div>
-            <div class="stat-value">47</div>
-            <div class="stat-change">+5 from avg</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-label">Reservations</div>
-            <div class="stat-value">12</div>
-            <div class="stat-change">3 tonight remaining</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-label">AI Interactions</div>
-            <div class="stat-value">89</div>
-            <div class="stat-change">96% satisfaction</div>
-        </div>
-    </div>
 
-    <div class="two-col">
-        <div class="section-card">
-            <div class="section-title">Recent Orders</div>
-            <table class="orders-table">
-                <thead>
-                    <tr>
-                        <th>Order</th>
-                        <th>Items</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>#2041</td>
-                        <td>Crispy Duck, Thai Curry</td>
-                        <td>$56.00</td>
-                        <td><span class="badge badge-green">Ready</span></td>
-                    </tr>
-                    <tr>
-                        <td>#2040</td>
-                        <td>Fuji Mama Roll x2</td>
-                        <td>$36.00</td>
-                        <td><span class="badge badge-yellow">Preparing</span></td>
-                    </tr>
-                    <tr>
-                        <td>#2039</td>
-                        <td>Sesame Beef, Pad Thai</td>
-                        <td>$52.00</td>
-                        <td><span class="badge badge-green">Delivered</span></td>
-                    </tr>
-                    <tr>
-                        <td>#2038</td>
-                        <td>Dragon Roll, Miso Soup</td>
-                        <td>$34.00</td>
-                        <td><span class="badge badge-red">Cancelled</span></td>
-                    </tr>
-                </tbody>
-            </table>
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-panel active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Today's Revenue</div>
+                    <div class="stat-value">$3,840</div>
+                    <div class="stat-trend trend-up">+18% vs yesterday</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Orders Today</div>
+                    <div class="stat-value">47</div>
+                    <div class="stat-trend trend-up">+5 from avg</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Reservations</div>
+                    <div class="stat-value">12</div>
+                    <div class="stat-trend">3 tonight remaining</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">AI Interactions</div>
+                    <div class="stat-value">89</div>
+                    <div class="stat-trend trend-up">96% satisfaction</div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.5rem;">
+                <div class="card">
+                    <div class="card-title">Recent Orders</div>
+                    <table>
+                        <thead>
+                            <tr><th>Order</th><th>Items</th><th>Total</th><th>Status</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>#2041</td><td>Crispy Duck, Thai Curry</td><td>$56.00</td><td><span class="status status-ready">Ready</span></td></tr>
+                            <tr><td>#2040</td><td>Fuji Mama Roll x2</td><td>$36.00</td><td><span class="status status-preparing">Preparing</span></td></tr>
+                            <tr><td>#2039</td><td>Sesame Beef, Pad Thai</td><td>$52.00</td><td><span class="status" style="color:#888">Delivered</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card">
+                    <div class="card-title">AI Concierge Log</div>
+                    <div class="log-item">
+                        <div class="log-time">2:47 PM</div>
+                        <div class="log-text">Guest inquired about gluten-free options. Directed to Thai curry and grilled salmon.</div>
+                    </div>
+                    <div class="log-item">
+                        <div class="log-time">2:31 PM</div>
+                        <div class="log-text">Reservation booked for party of 4 at 7:30 PM via AI chat.</div>
+                    </div>
+                    <div class="log-item">
+                        <div class="log-time">1:58 PM</div>
+                        <div class="log-text">Voice greeting played for 3 new website visitors. 2 proceeded to menu.</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="section-card">
-            <div class="section-title">AI Concierge Log</div>
-            <div class="ai-log">
-                <div class="ai-log-item">
-                    <div class="ai-log-time">2:47 PM</div>
-                    <div class="ai-log-text">Guest inquired about gluten-free options. Directed to Thai curry and grilled salmon.</div>
+
+        <!-- Orders Tab -->
+        <div id="orders" class="tab-panel">
+            <div class="card">
+                <div class="card-title">All Orders</div>
+                <table>
+                    <thead>
+                        <tr><th>Time</th><th>Order #</th><th>Customer</th><th>Items</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>2:55 PM</td><td>#2042</td><td>John D.</td><td>California Roll, Pad See Ew</td><td><span class="status status-preparing">New</span></td></tr>
+                        <tr><td>2:41 PM</td><td>#2041</td><td>Sarah L.</td><td>Crispy Duck, Thai Curry</td><td><span class="status status-ready">Ready</span></td></tr>
+                        <tr><td>2:20 PM</td><td>#2040</td><td>Mike R.</td><td>Fuji Mama Roll x2</td><td><span class="status status-preparing">Preparing</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Reservations Tab -->
+        <div id="reservations" class="tab-panel">
+            <div class="card">
+                <div class="card-title">Tonight's Reservations</div>
+                <table>
+                    <thead>
+                        <tr><th>Time</th><th>Name</th><th>Party</th><th>Source</th><th>Notes</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>6:30 PM</td><td>Thompson</td><td>4</td><td>AI Chat</td><td>Anniversary</td></tr>
+                        <tr><td>7:00 PM</td><td>Gomez</td><td>2</td><td>Website</td><td>Window seat</td></tr>
+                        <tr><td>7:30 PM</td><td>Chen</td><td>6</td><td>AI Phone</td><td>Birthday</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Menu Tab -->
+        <div id="menu" class="tab-panel">
+            <div class="card">
+                <div class="card-title">Quick Availability (86 List)</div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <span>Peking Duck</span>
+                        <div class="toggle on"></div>
+                    </div>
+                    <div class="menu-item">
+                        <span>Bluefin Tuna</span>
+                        <div class="toggle on"></div>
+                    </div>
+                    <div class="menu-item">
+                        <span>Tangerine Beef</span>
+                        <div class="toggle on"></div>
+                    </div>
+                    <div class="menu-item">
+                        <span>Mango Sticky Rice</span>
+                        <div class="toggle"></div>
+                    </div>
                 </div>
-                <div class="ai-log-item">
-                    <div class="ai-log-time">2:31 PM</div>
-                    <div class="ai-log-text">Reservation booked for party of 4 at 7:30 PM via AI chat.</div>
+            </div>
+        </div>
+
+        <!-- Analytics Tab -->
+        <div id="analytics" class="tab-panel">
+            <div class="card">
+                <div class="card-title">Performance Metrics</div>
+                <p style="color: #666;">Analytics data loading...</p>
+            </div>
+        </div>
+
+        <!-- Logs Tab -->
+        <div id="logs" class="tab-panel">
+            <div class="card">
+                <div class="card-title">System Activity</div>
+                <div class="log-item">
+                    <div class="log-time">3:01 PM</div>
+                    <div class="log-text">AI handled phone inquiry for parking. SMS sent.</div>
                 </div>
-                <div class="ai-log-item">
-                    <div class="ai-log-time">1:58 PM</div>
-                    <div class="ai-log-text">Voice greeting played for 3 new website visitors. 2 proceeded to menu.</div>
+                <div class="log-item">
+                    <div class="log-time">2:58 PM</div>
+                    <div class="log-text">Inventory updated: Mango Sticky Rice marked out of stock.</div>
                 </div>
-                <div class="ai-log-item">
-                    <div class="ai-log-time">1:22 PM</div>
-                    <div class="ai-log-text">Guest asked about parking. AI provided Post Road location info.</div>
+            </div>
+        </div>
+
+        <!-- Voice Tab -->
+        <div id="voice" class="tab-panel">
+            <div class="card">
+                <div class="card-title">AI Voice Configuration</div>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div>
+                        <label style="display: block; font-size: 0.8rem; color: #666; margin-bottom: 0.5rem;">Current Voice Profile</p>
+                        <select style="background: #000; color: white; border: 1px solid var(--glass); padding: 0.5rem; border-radius: 4px; width: 100%;">
+                            <option>Premium Hospitality Host (ElevenLabs)</option>
+                            <option>Standard Assistant</option>
+                        </select>
+                    </div>
+                    <button class="nav-item" style="background: var(--dark-red); color: white; width: fit-content;">Test Voice Greeting</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="section-card" style="margin-top: 0;">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div class="section-title" style="margin-bottom: 0;">Tonight's Reservations</div>
-            <button class="btn btn-gold">+ New Reservation</button>
-        </div>
-        <table class="orders-table" style="margin-top: 1rem;">
-            <thead>
-                <tr>
-                    <th>Time</th>
-                    <th>Name</th>
-                    <th>Party</th>
-                    <th>Notes</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>6:00 PM</td>
-                    <td>Chen, Family</td>
-                    <td>5 guests</td>
-                    <td>Anniversary dinner</td>
-                    <td><span class="badge badge-green">Confirmed</span></td>
-                </tr>
-                <tr>
-                    <td>7:30 PM</td>
-                    <td>Rodriguez, M.</td>
-                    <td>4 guests</td>
-                    <td>AI booking via chat</td>
-                    <td><span class="badge badge-green">Confirmed</span></td>
-                </tr>
-                <tr>
-                    <td>8:00 PM</td>
-                    <td>Thompson, J.</td>
-                    <td>2 guests</td>
-                    <td>Birthday, shellfish allergy</td>
-                    <td><span class="badge badge-yellow">Pending</span></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</main>
+    <script>
+        const tabs = document.querySelectorAll('.nav-item[data-tab]');
+        const panels = document.querySelectorAll('.tab-panel');
+        const title = document.getElementById('tab-title');
 
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.tab;
+                
+                // Update nav
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Update panels
+                panels.forEach(p => p.classList.remove('active'));
+                document.getElementById(target).classList.add('active');
+
+                // Update title
+                title.textContent = tab.textContent;
+            });
+        });
+
+        // Toggle functionality for menu items
+        document.querySelectorAll('.toggle').forEach(t => {
+            t.addEventListener('click', () => t.classList.toggle('on'));
+        });
+    </script>
 </body>
 </html>

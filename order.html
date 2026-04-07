@@ -26,116 +26,125 @@
 
         .cart-summary { margin-top: auto; padding-top: 2rem; border-top: 1px solid var(--glass); }
         .cart-total { display: flex; justify-content: space-between; font-weight: 600; margin-bottom: 1rem; }
-        .checkout-btn { width: 100%; background: var(--dark-red); color: white; border: none; padding: 1rem; border-radius: 4px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+        .checkout-btn { width: 100%; background: var(--dark-red); color: white; border: none; padding: 1rem; border-radius: 4px; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .checkout-btn:hover { background: #a50000; }
 
         /* Main Content */
         .menu-container { flex: 1; padding: 3rem; overflow-y: auto; }
         .menu-section { margin-bottom: 4rem; }
         .menu-section h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 2rem; color: var(--gold); border-bottom: 1px solid var(--glass); padding-bottom: 0.5rem; }
-        
+
         .items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
         .item-card { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--glass); overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; }
         .item-card:hover { transform: translateY(-5px); border-color: var(--gold); }
-        
         .item-img { height: 200px; background-size: cover; background-position: center; position: relative; }
         .item-price-tag { position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.8); padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; color: var(--gold); }
-        
         .item-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
         .item-name { font-family: 'Playfair Display', serif; font-size: 1.25rem; margin-bottom: 0.5rem; }
         .item-desc { color: #aaa; font-size: 0.9rem; margin-bottom: 1.5rem; flex: 1; }
-        
         .add-btn { background: var(--glass); color: white; border: 1px solid var(--gold); padding: 0.75rem; border-radius: 6px; cursor: pointer; transition: 0.3s; font-weight: 600; }
         .add-btn:hover { background: var(--gold); color: black; }
 
         /* Notification */
         .notif { position: fixed; bottom: 2rem; right: 2rem; background: #222; border: 1px solid var(--gold); padding: 1rem 2rem; border-radius: 8px; transform: translateY(150%); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2000; }
         .notif.show { transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--glass); }
+        }
     </style>
 </head>
 <body>
     <div class="sidebar">
         <h2 onclick="location.href='index.html'">LITTLE KITCHEN</h2>
-        <div class="categories">
-            <a href="#apps" class="cat-link active">Appetizers</a>
-            <a href="#thai" class="cat-link">Thai Classics</a>
-            <a href="#sushi" class="cat-link">Sushi Rolls</a>
-            <a href="#curry" class="cat-link">Curries</a>
-        </div>
-        
+        <a href="#apps" class="cat-link active">Appetizers</a>
+        <a href="#thai" class="cat-link">Thai Classics</a>
+        <a href="#sushi" class="cat-link">Sushi Rolls</a>
+        <a href="#curry" class="cat-link">Curries</a>
+
         <div class="cart-summary">
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <label style="display:block; font-size: 0.8rem; color: #888; margin-bottom: 0.5rem;">YOUR NAME</label>
+                <input type="text" id="custName" placeholder="For the order..." style="width: 100%; background: #111; border: 1px solid #333; color: white; padding: 0.8rem; border-radius: 4px; outline: none;">
+            </div>
             <div class="cart-total">
                 <span>Items: <span id="cart-count">0</span></span>
-                <span>$<span id="cart-total">0.00</span></span>
+                <span>Total: $<span id="cart-total">0.00</span></span>
             </div>
             <button class="checkout-btn" onclick="checkout()">Complete Order</button>
         </div>
     </div>
 
     <div class="menu-container">
-        <section id="apps" class="menu-section">
+        <section class="menu-section" id="apps">
             <h3>Appetizers</h3>
-            <div class="items-grid">
-                <div class="item-card">
-                    <div class="item-img" style="background-image: url('https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=500&q=80')">
-                        <div class="item-price-tag">$14.50</div>
-                    </div>
-                    <div class="item-body">
-                        <div class="item-name">Satay Chicken Sticks</div>
-                        <p class="item-desc">Grilled marinated chicken skewers served with our signature creamy peanut sauce and cucumber relish.</p>
-                        <button class="add-btn" onclick="addToCart('Satay Chicken Sticks', 14.50)">Add to Order</button>
-                    </div>
-                </div>
-                <div class="item-card">
-                    <div class="item-img" style="background-image: url('https://images.unsplash.com/photo-1606787366850-de6330128bfc?auto=format&fit=crop&w=500&q=80')">
-                        <div class="item-price-tag">$9.00</div>
-                    </div>
-                    <div class="item-body">
-                        <div class="item-name">Roti Canai</div>
-                        <p class="item-desc">Malaysian style pancake, toasted until golden brown and served with a spicy curry dipping sauce.</p>
-                        <button class="add-btn" onclick="addToCart('Roti Canai', 9.00)">Add to Order</button>
-                    </div>
-                </div>
-            </div>
+            <div class="items-grid" id="apps-grid"></div>
         </section>
 
-        <section id="thai" class="menu-section">
+        <section class="menu-section" id="thai">
             <h3>Thai Classics</h3>
-            <div class="items-grid">
-                <div class="item-card">
-                    <div class="item-img" style="background-image: url('https://images.unsplash.com/photo-1559311648-d46f4d8593d9?auto=format&fit=crop&w=500&q=80')">
-                        <div class="item-price-tag">$19.00</div>
-                    </div>
-                    <div class="item-body">
-                        <div class="item-name">Pad Thai</div>
-                        <p class="item-desc">Thin rice noodles stir-fried with eggs, bean sprouts, scallions, and crushed peanuts in tamarind sauce.</p>
-                        <button class="add-btn" onclick="addToCart('Pad Thai', 19.00)">Add to Order</button>
-                    </div>
-                </div>
-            </div>
+            <div class="items-grid" id="thai-grid"></div>
         </section>
 
-        <section id="sushi" class="menu-section">
+        <section class="menu-section" id="sushi">
             <h3>Signature Sushi</h3>
-            <div class="items-grid">
-                <div class="item-card">
-                    <div class="item-img" style="background-image: url('https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=500&q=80')">
-                        <div class="item-price-tag">$21.50</div>
-                    </div>
-                    <div class="item-body">
-                        <div class="item-name">Fuji Mama Roll</div>
-                        <p class="item-desc">Tempura shrimp and spicy tuna inside, topped with fresh salmon, avocado, and eel sauce.</p>
-                        <button class="add-btn" onclick="addToCart('Fuji Mama Roll', 21.50)">Add to Order</button>
-                    </div>
-                </div>
-            </div>
+            <div class="items-grid" id="sushi-grid"></div>
+        </section>
+
+        <section class="menu-section" id="curry">
+            <h3>Curries</h3>
+            <div class="items-grid" id="curry-grid"></div>
         </section>
     </div>
 
-    <div id="notif" class="notif">Item added to your order!</div>
+    <div class="notif" id="notif">Item added to your order!</div>
 
     <script>
+        const menuData = {
+            apps: [
+                { name: "Satay Chicken Sticks", price: 14.50, desc: "Grilled marinated chicken skewers with peanut sauce.", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=500&q=80" },
+                { name: "Roti Canai", price: 9.00, desc: "Malaysian style pancake served with spicy curry dip.", img: "https://images.unsplash.com/photo-1606471191009-63994c53433b?auto=format&fit=crop&w=500&q=80" },
+                { name: "Crab Rangoon", price: 10.50, desc: "Crispy wonton skin with cream cheese and kani (7pcs).", img: "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=500&q=80" }
+            ],
+            thai: [
+                { name: "Pad Thai", price: 19.00, desc: "Thin rice noodles stir-fried with eggs, bean sprouts, and peanuts.", img: "https://images.unsplash.com/photo-1559311648-d46f4d8593d8?auto=format&fit=crop&w=500&q=80" },
+                { name: "Green Curry", price: 18.90, desc: "Authentic Thai green curry with coconut milk and basil.", img: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=500&q=80" },
+                { name: "Crispy Duck", price: 28.00, desc: "Half duck roasted with Chef special sauce.", img: "https://images.unsplash.com/photo-1518492104633-130d0cc84637?auto=format&fit=crop&w=500&q=80" }
+            ],
+            sushi: [
+                { name: "Fuji Mama Roll", price: 21.50, desc: "Tempura shrimp, spicy tuna topped with salmon and avocado.", img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=500&q=80" },
+                { name: "Little Kitchen Roll", price: 18.00, desc: "Tuna, salmon, yellowtail with avocado and tobiko.", img: "https://images.unsplash.com/photo-1583623025817-d180a2221d0a?auto=format&fit=crop&w=500&q=80" }
+            ],
+            curry: [
+                { name: "Panang Curry", price: 17.50, desc: "Rich and creamy curry with bell peppers and kaffir lime.", img: "https://images.unsplash.com/photo-1548943487-a2e4e43b4853?auto=format&fit=crop&w=500&q=80" },
+                { name: "Massaman Curry", price: 17.50, desc: "Southern Thai curry with potatoes, onions, and peanuts.", img: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=500&q=80" }
+            ]
+        };
+
         let cart = JSON.parse(localStorage.getItem('lk_cart')) || [];
         updateUI();
+
+        function renderMenu() {
+            for (let cat in menuData) {
+                const grid = document.getElementById(`${cat}-grid`);
+                if (!grid) continue;
+                menuData[cat].forEach(item => {
+                    grid.innerHTML += `
+                        <div class="item-card">
+                            <div class="item-img" style="background-image: url('${item.img}')">
+                                <div class="item-price-tag">$${item.price.toFixed(2)}</div>
+                            </div>
+                            <div class="item-body">
+                                <div class="item-name">${item.name}</div>
+                                <div class="item-desc">${item.desc}</div>
+                                <button class="add-btn" onclick="addToCart('${item.name}', ${item.price})">Add to Order</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        }
 
         function addToCart(name, price) {
             cart.push({ name, price, id: Date.now() });
@@ -158,26 +167,25 @@
         }
 
         function checkout() {
-            if (cart.length === 0) {
-                alert('Your cart is empty!');
-                return;
-            }
-            
+            const name = document.getElementById('custName').value.trim();
+            if (!name) return alert('Please enter your name for the order.');
+            if (cart.length === 0) return alert('Your cart is empty!');
+
             const orders = JSON.parse(localStorage.getItem('lk_orders')) || [];
             const newOrder = {
                 id: 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase(),
+                customer: name,
                 items: cart,
                 total: cart.reduce((sum, item) => sum + item.price, 0),
                 time: new Date().toLocaleString(),
                 status: 'Pending'
             };
-            
             orders.push(newOrder);
             localStorage.setItem('lk_orders', JSON.stringify(orders));
             localStorage.removeItem('lk_cart');
             cart = [];
             updateUI();
-            
+            document.getElementById('custName').value = '';
             showNotif('Order placed successfully!');
             setTimeout(() => location.href = 'index.html', 1500);
         }
@@ -192,6 +200,8 @@
                 target.scrollIntoView({ behavior: 'smooth' });
             };
         });
+
+        renderMenu();
     </script>
 </body>
 </html>
